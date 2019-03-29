@@ -1,0 +1,39 @@
+{
+  "factoryList": 
+  {
+    "FeedMill": {
+      "Value": 200,
+      "Cost": 150,
+      "CostTime": 20
+    },
+    "MilkPlant": {
+      "Value": 300,
+      "Cost": 200,
+      "CostTime": 40
+    },
+    "SugarHouse": {
+      "Value": 400,
+      "Cost": 250,
+      "CostTime": 60
+    }
+  },
+  
+  "farmList": {
+    "Hennery": {
+      "Value": 200,
+      "Cost": 150,
+      "CostTime": 20
+    },
+    "CattleFarm": {
+      "Value": 300,
+      "Cost": 200,
+      "CostTime": 40
+    },
+    "SheepFarm": {
+      "Value": 400,
+      "Cost": 250,
+      "CostTime": 60
+    }
+  }
+}
+

@@ -1,0 +1,22 @@
+﻿<Properties StartupConfiguration="{79442293-7E96-307B-F9DE-2D63F40DDE1B}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Util/DBHandler.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Manager/BuildingController.cs" Line="77" Column="42" />
+      <File FileName="Assets/Scripts/Building/Farm/FarmBase.cs" Line="12" Column="30" />
+      <File FileName="Assets/Scripts/Building/Farm/CattleFarm.cs" Line="18" Column="13" />
+      <File FileName="Assets/Scripts/Goods/Goods.cs" Line="7" Column="24" />
+      <File FileName="Assets/Scripts/Building/BuildingBase.cs" Line="15" Column="5" />
+      <File FileName="Assets/Resources/BuildingConfig.json" Line="23" Column="20" />
+      <File FileName="Assets/Scripts/Manager/UIManager.cs" Line="9" Column="3" />
+      <File FileName="Assets/Scripts/UI/Menu.cs" Line="18" Column="44" />
+      <File FileName="Assets/Scripts/Util/DBHandler.cs" Line="12" Column="9" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Test PreferredExecutionTarget="Unity.Editor" />
+</Properties>
