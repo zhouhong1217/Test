@@ -17,6 +17,10 @@ public enum BuildStatus{
 
 public class BuildingBase : MonoBehaviour 
 {
+    public int Id;
+
+    public string Name;
+
     public int value;
 
     public int cost;
@@ -27,15 +31,14 @@ public class BuildingBase : MonoBehaviour
 
     private float pressedTime = 0f;
 
-    private bool isBuilding;
+    private bool isBuildComplete;
     private bool isDraging;
 
-    private BuildStatus buildStatus;
+    public BuildStatus buildStatus;
 
 	private void Awake()
 	{
         gameObject.AddComponent<BoxCollider2D>();
-        buildStatus = BuildStatus.Moving;
 	}
 
     protected virtual void OnMouseDown()

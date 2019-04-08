@@ -1,14 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using LitJson;
+using UnityEngine;
+
+public class MyBuildingInfo
+{
+    public string Name { get; set; }
+    public int Id { get; set; }
+    public int Value { get; set; }
+    public int DestroyBackCoins { get; set; }
+    public string BuildType { get; set; }
+}
+
+public class MyBuildingList
+{
+    public Dictionary<string, MyBuildingInfo> factoryList = new Dictionary<string, MyBuildingInfo>();
+    public Dictionary<string, MyBuildingInfo> farmList = new Dictionary<string, MyBuildingInfo>();
+    public Dictionary<string, MyBuildingInfo> houseList = new Dictionary<string, MyBuildingInfo>();
+    public Dictionary<string, MyBuildingInfo> storeList = new Dictionary<string, MyBuildingInfo>();
+}
 
 /// <summary>
 /// DBHandler 不考虑线程安全，Unity是单线程的，可以用协程代替多线程
 /// </summary>
-public class DBHandler 
+public class DBHandler
 {
 
     private DBHandler()
     {
+        //TODO 读取数据，这里只是初始化
         coins = 100000;
         playerLevel = 1;
         exps = 0;
@@ -90,16 +110,10 @@ public class DBHandler
         }
     }
 
-    //public List<BuildingBase> Buildings
-    //{
-    //    get
-    //    {
-    //        return buildings;
-    //    }
-    //}
-
-    public static DBHandler Instance{
-        get{
+    public static DBHandler Instance
+    {
+        get
+        {
             if (instance == null)
             {
                 instance = new DBHandler();
@@ -166,4 +180,55 @@ public class DBHandler
         teamNumbers += count;
         return true;
     }
+
+#region 读写农场已有的建筑
+    public static void SaveFarmBuildToJsonData(Dictionary<int, FarmBase> farms)
+    {
+        MyBuildingList myBuildingList = new MyBuildingList();
+
+        for (int i = 0; i < farms.Count; i++)
+        {
+            MyBuildingInfo info = new MyBuildingInfo()
+            {
+                Value = farms[i].value,
+                Id = farms[i].Id,
+                Name = farms[i].Name,
+                DestroyBackCoins = farms[i].cost / 2,
+                BuildType = farms[i].farmType.ToString()
+            };
+            myBuildingList.farmList.Add(farms[i].Id.ToString(), info);
+        }
+        string result = JsonMapper.ToJson(myBuildingList);
+
+        Debug.Log(result);
+    }
+
+    public static void ReadFarmBuildToObj()
+    {
+        
+    }
+#endregion
+
+#region 读写工厂已有的建筑
+    public static void SaveFactoryBuildToJsonData(Dictionary<int, FactoryBase> farms)
+    {
+        MyBuildingList myBuildingList = new MyBuildingList();
+
+        for (int i = 0; i < farms.Count; i++)
+        {
+            MyBuildingInfo info = new MyBuildingInfo()
+            {
+                Value = farms[i].value,
+                Id = farms[i].Id,
+                Name = farms[i].Name,
+                DestroyBackCoins = farms[i].cost / 2,
+                BuildType = farms[i].factoryType.ToString()
+            };
+            myBuildingList.farmList.Add(farms[i].Id.ToString(), info);
+        }
+        string result = JsonMapper.ToJson(myBuildingList);
+
+        Debug.Log(result);
+    }
+#endregion
 }

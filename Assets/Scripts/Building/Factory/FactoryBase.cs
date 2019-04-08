@@ -15,7 +15,7 @@ public enum FactoryType
 
 public class FactoryBase : BuildingBase 
 {
-    public int Id;
+    public FactoryType factoryType;
 
     public Goods[] goodsContainer = new Goods[6];//存放已经制作好的商品
 

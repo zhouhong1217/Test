@@ -8,7 +8,7 @@ public class BuildingController : MonoBehaviour
 
     [SerializeField] private Transform townContainer;
 
-    private Dictionary<int, HouseBase> houseDictionary = new Dictionary<int, HouseBase>();//key值从1开始。。。
+    private Dictionary<int, HouseBase> houseDictionary = new Dictionary<int, HouseBase>();//key值从1开始。。。key值为id
     private Dictionary<int, FactoryBase> factoryDictionary = new Dictionary<int, FactoryBase>();//key值从1开始。。。
     private Dictionary<int, StoreBase> storeDictionary = new Dictionary<int, StoreBase>();//key值从1开始。。。
     private Dictionary<int, FarmBase> farmDictionary = new Dictionary<int, FarmBase>();//key值从1开始。。。
@@ -74,35 +74,35 @@ public class BuildingController : MonoBehaviour
         {
             case FarmType.CattleFarm:
                 Debug.Log("生成一个养牛场");
-                BuildingInfo cattleInfo = BuildingConfig.instance.container.farmList["CattleFarm"];
+                BuildingInfo cattleInfo = BuildingConfig.Instance.Container.farmList["CattleFarm"];
 
                 if (DBHandler.Instance.Coins < cattleInfo.Cost)
                     return false;
                 CattleFarm cattleFarmPrefab = Resources.Load<CattleFarm>("Prefabs/CattleFarm");
                 CattleFarm cattleFarm = Instantiate(cattleFarmPrefab);
-
+                cattleFarm.farmType = FarmType.CattleFarm;
                 InitFarmContent(cattleFarm, cattleInfo);
                 break;
             case FarmType.Hennery:
                 Debug.Log("生成一个养鸡场");
-                BuildingInfo henneryInfo = BuildingConfig.instance.container.farmList["Hennery"];
+                BuildingInfo henneryInfo = BuildingConfig.Instance.Container.farmList["Hennery"];
 
                 if (DBHandler.Instance.Coins < henneryInfo.Cost)
                     return false;
                 HenneryFarm henneryPrefab = Resources.Load<HenneryFarm>("");
                 HenneryFarm henneryFarm = Instantiate(henneryPrefab);
-
+                henneryFarm.farmType = FarmType.Hennery;
                 InitFarmContent(henneryFarm, henneryInfo);
                 break;
             case FarmType.SheepFarm:
                 Debug.Log("生成一个养羊场");
-                BuildingInfo sheepInfo = BuildingConfig.instance.container.farmList["SheepFarm"];
+                BuildingInfo sheepInfo = BuildingConfig.Instance.Container.farmList["SheepFarm"];
 
                 if (DBHandler.Instance.Coins < sheepInfo.Cost)
                     return false;
                 SheepFarm sheepFarmPrefab = Resources.Load<SheepFarm>("");
                 SheepFarm sheepFarm = Instantiate(sheepFarmPrefab);
-
+                sheepFarm.farmType = FarmType.SheepFarm;
                 InitFarmContent(sheepFarm, sheepInfo);
                 break;
             default:
@@ -115,12 +115,30 @@ public class BuildingController : MonoBehaviour
     {
         farm.transform.SetParent(townContainer);
 
+        farm.buildStatus = BuildStatus.Moving;
         farm.value = info.Value;
         farm.cost = info.Cost;
         farm.costTime = info.CostTime;
         farm.Id = farmDictionary.Count + 1;
         farm.InitContent();
-        farmDictionary.Add(farmDictionary.Count + 1, farm);
+        farmDictionary.Add(farm.Id, farm);
+    }
+
+	public void SaveToJsonData()
+    {
+        ////TODO test
+        //for (int i = 0; i < 10; i++)
+        //{
+        //    CattleFarm cattleFarmPrefab = Resources.Load<CattleFarm>("Prefabs/CattleFarm");
+        //    CattleFarm cattleFarm = Instantiate(cattleFarmPrefab);
+        //    cattleFarm.value = i*100;
+        //    cattleFarm.cost = i*50;
+        //    cattleFarm.costTime = i*10;
+        //    cattleFarm.Id = i;
+        //    farmDictionary[i] = cattleFarm;
+        //}
+
+        DBHandler.SaveFarmBuildToJsonData(farmDictionary);
     }
 
     /// <summary>
@@ -135,7 +153,7 @@ public class BuildingController : MonoBehaviour
             case FactoryType.FeedMill:
                 //TODO Instantiate<Factory> Prefab
                 Debug.Log("生成一个饲料厂");
-                if (DBHandler.Instance.Coins < BuildingConfig.instance.container.factoryList["FeedMill"].Cost)
+                if (DBHandler.Instance.Coins < BuildingConfig.Instance.Container.factoryList["FeedMill"].Cost)
                     return false;
                 FeedMill feedMillPrefab = Resources.Load<FeedMill>("");
                 FeedMill feedMill = Instantiate(feedMillPrefab);
@@ -145,7 +163,7 @@ public class BuildingController : MonoBehaviour
             case FactoryType.MilkPlant:
                 //TODO Instantiate<House> Prefab
                 Debug.Log("生成一个乳品厂");
-                if (DBHandler.Instance.Coins < BuildingConfig.instance.container.factoryList["MilkPlant"].Cost)
+                if (DBHandler.Instance.Coins < BuildingConfig.Instance.Container.factoryList["MilkPlant"].Cost)
                     return false;
                 MilkPlant milkPlantPrefab = Resources.Load<MilkPlant>("");
                 MilkPlant milkPlant = Instantiate(milkPlantPrefab);
@@ -155,7 +173,7 @@ public class BuildingController : MonoBehaviour
             case FactoryType.SugarHouse:
                 //TODO Instantiate<Store> Prefab
                 Debug.Log("生成一个制糖厂");
-                if (DBHandler.Instance.Coins < BuildingConfig.instance.container.factoryList["SugarHouse"].Cost)
+                if (DBHandler.Instance.Coins < BuildingConfig.Instance.Container.factoryList["SugarHouse"].Cost)
                     return false;
                 SugarHouse SugarHousePrefab = Resources.Load<SugarHouse>("");
                 SugarHouse sugarHouse = Instantiate(SugarHousePrefab);
