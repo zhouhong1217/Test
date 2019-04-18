@@ -89,7 +89,7 @@ public class BuildingController : MonoBehaviour
 
                 if (DBHandler.Instance.Coins < henneryInfo.Cost)
                     return false;
-                HenneryFarm henneryPrefab = Resources.Load<HenneryFarm>("");
+                HenneryFarm henneryPrefab = Resources.Load<HenneryFarm>("Prefabs/Hennery");
                 HenneryFarm henneryFarm = Instantiate(henneryPrefab);
                 henneryFarm.farmType = FarmType.Hennery;
                 InitFarmContent(henneryFarm, henneryInfo);
@@ -100,7 +100,7 @@ public class BuildingController : MonoBehaviour
 
                 if (DBHandler.Instance.Coins < sheepInfo.Cost)
                     return false;
-                SheepFarm sheepFarmPrefab = Resources.Load<SheepFarm>("");
+                SheepFarm sheepFarmPrefab = Resources.Load<SheepFarm>("Prefabs/SheepFarm");
                 SheepFarm sheepFarm = Instantiate(sheepFarmPrefab);
                 sheepFarm.farmType = FarmType.SheepFarm;
                 InitFarmContent(sheepFarm, sheepInfo);

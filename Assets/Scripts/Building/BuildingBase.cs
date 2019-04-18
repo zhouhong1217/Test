@@ -64,6 +64,7 @@ public class BuildingBase : MonoBehaviour
         
         //TODO 一直按压时效果，抬起建筑，可拖动
         Debug.Log("OnMouseDrag");
+		buildStatus = BuildStatus.Moving;
 	}
 
     protected virtual void OnMouseUpAsButton()
@@ -71,5 +72,7 @@ public class BuildingBase : MonoBehaviour
         pressedTime = 0f;
 		//TODO 当鼠标抬起时
         Debug.Log("OnMouseUp");
+
+		buildStatus = BuildStatus.Building;
 	}
 }
